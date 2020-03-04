@@ -14,7 +14,7 @@ const STORE=[
     },
 
     {
-        photo:"side-plank-pose.jpg"
+        photo:"side-plank-pose.jpg",
         options:["This is way harder than it looks", "Side Plank", "Extended Side Twist",
                     "Reach for the Stars Pose"],
         correctAnswer:"Side Plank"
@@ -30,7 +30,7 @@ const STORE=[
     {
         photo:"dancer-pose.jpg",
         options:["Nope, not even gonna try that one", "Dancer Pose",
-                    "One-legged Tree Pose", "Balance Posture"]
+                    "One-legged Tree Pose", "Balance Posture"],
         correctAnswer:"Dancer Pose"
     }
 ]
@@ -38,7 +38,14 @@ const STORE=[
 //Start the quiz
 function renderQuiz(){
     console.log('`renderQuiz` ran')
-    //render the quiz question and multiple choice options
+    const quizStartString='<form><fieldset><legend>What is the Name of this Yoga Pose?</legend> <div> <img src="yoga-images/easy-pose.jpg" alt="woman sitting in a crosslegged seat"></div></fieldset></form>';
+
+    $('.js-question-box').html(quizStartString);
+    //form should be rendered in ".js-question-box"
+    //form should include a legend with question
+    //loop through objects in STORE and render 'photo' in the div
+    //and render 'options' as radio inputs
+    //render a button to check answer
 }
 
 //display the question number
@@ -52,16 +59,11 @@ function displayScore(){
 
 }
 
-//responsible to give feedback if answer is correct
+//responsible to give feedback on whether answer is correct or incorrect
 function rightAnswer(){
 
 }
 
-
-//responsible to display feedback for incorrect answers
-function wrongAnswerFeedback(){
-
-}
 
 //responsible to take user to next question
 function nextQuestion(){
