@@ -39,7 +39,7 @@ let currentQuestion=0;
 let score=0;
 function startQuiz(){
    // $("#start").on('click', function (event){
-        renderQuiz();
+        renderQuiz(currentQuestion);
   //  });
 }
 //Display options for each question
@@ -53,9 +53,9 @@ function generateOptionsString(){
     };
  }
 //creates the HTML for the question pages
-function renderQuiz(){
+function renderQuiz(currentQues){
     console.log('`renderQuiz` ran');
-    let photo = STORE[currentQuestion].photo;
+    let photo = STORE[currentQues].photo;
 
     const quizStartString=`<form class=><fieldset><legend>What is the Name of this Yoga Pose?<img class="photo" src="${photo}" alt="Woman in a crosslegged seat with hands at her heart"></legend><div class="js-options"></div><button type="submit" class="js-submit" >Submit</button><button type="submit" class="next">Next</button></fieldset></form>`;
 
@@ -80,38 +80,47 @@ function renderQuiz(){
 //display the question number
 function whatQuestion(){
     console.log('`whatQuestion ran')
-    $(".js-header-display").html(`<h2>Question: ${currentQuestion+1}</h2>`)
+    $(".js-question-number").html(`<span> Question: ${currentQuestion+1}</span>`)
     //Display the number of the question the header
 }
 
 //responsible to display number of correct answers so far
 function displayScore(){
     console.log('displaying Score');
-    $(".js-header-display").append(`<h2>Score: ${score}/5</h2>`);
+    $(".js-score-header").html(`<span>Score: ${score}/${STORE.length}</span>`);
 
 }
 
 //responsible to give feedback on whether answer is correct or incorrect
 function rightAnswer(){
-    $('.js-submit').hide;
-    $('.next').show;
-    let answer = $("input[name=pose]:checked").val();
+    console.log(`what's your answer?`)
+    $('.js-submit').hide();
+    $('.next').show();
+
+   let answer = $("input[name=pose]:checked").val();
     let correct = STORE[currentQuestion].correctAnswer;
+    
     if(answer === correct){
         score++;
-        $('js-options').append('<p>Correct!</p>');
+
+        displayScore();
+        $('.js-options').append('<p>Correct!</p>');
     }
     else{
-        $('js-options').append(`<p>Nope, the correct answer is ${correct}`)
+        $('.js-options').append(`<p>Nope, the correct answer is ${correct}`)
     };
+
+    currentQuestion++;
+
+    
+   
 }
 
 //Answer feedback on submit
 function getAnswerFeedback(){
     $('form').on('click', '.js-submit', function(e){
-        console.log('is your answer correct?')
         e.preventDefault();
-        rightAnswer();
+       rightAnswer();
     });
 }
 
@@ -119,11 +128,23 @@ function getAnswerFeedback(){
 
 //responsible to take user to next question
 function nextQuestion(){
+    $('form').on('click', '.next', function(e){
+        e.preventDefault();
+        if(currentQuestion===STORE.length){
+           yourResults();
+        }
+       
+        else{
+        renderQuiz(currentQuestion);
+        getAnswerFeedback();
+    };
+});
 
 }
 
 //responsible to display the Score Page when the quiz is finished
 function yourResults(){
+    console.log(`your results ran`)
 
 }
 
@@ -131,8 +152,8 @@ function yourResults(){
 function runQuiz(){
     startQuiz();
     getAnswerFeedback();
-    nextQuestion();
-    yourResults();
+   nextQuestion();
+    //yourResults();
 }
 
 $(runQuiz())
