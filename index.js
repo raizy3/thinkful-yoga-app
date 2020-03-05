@@ -96,6 +96,7 @@ function displayScore(){
 function rightAnswer(){
     console.log(`what's your answer?`)
     $('.js-submit').hide();
+    $('.multiple-choice').attr('disabled', true );
     $('.next').show();
 
    let answer = $("input[name=pose]:checked").val();
