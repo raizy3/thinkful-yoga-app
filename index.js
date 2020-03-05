@@ -28,7 +28,7 @@ const STORE=[
     },
 
     {
-        photo:"dancer-pose.jpg",
+        photo:"yoga-images/dancer-pose.jpg",
         options:["Nope, not even gonna try that one", "Dancer Pose",
                     "One-legged Tree Pose", "Balance Posture"],
         correctAnswer:"Dancer Pose"
@@ -37,10 +37,15 @@ const STORE=[
 //set values for current question and 
 let currentQuestion=0;
 let score=0;
+
 function startQuiz(){
-   // $("#start").on('click', function (event){
+   $(".js-question-box").on('click', '#start', function (e){
+    e.preventDefault();
+    currentQuestion=0;
+    score=0;
         renderQuiz(currentQuestion);
-  //  });
+        getAnswerFeedback();
+   });
 }
 //Display options for each question
 function generateOptionsString(){
@@ -52,6 +57,7 @@ function generateOptionsString(){
         $(".js-options").append(`<input type="radio" name="pose" value="${myOptions[i]}" id="pose-${i+1}" class="multiple-choice"required> <label for="pose-${i+1}">${myOptions[i]}</label><br>`);
     };
  }
+
 //creates the HTML for the question pages
 function renderQuiz(currentQues){
     console.log('`renderQuiz` ran');
@@ -68,11 +74,6 @@ function renderQuiz(currentQues){
     displayScore();
 
     $('.next').hide();
-    //form should be rendered in ".js-question-box"
-    //form should include a legend with question
-    //loop through objects in STORE and render 'photo' in the div
-    //and render 'options' as radio inputs
-    //render a button to check answer
 
 
 }
@@ -121,6 +122,7 @@ function getAnswerFeedback(){
     $('form').on('click', '.js-submit', function(e){
         e.preventDefault();
        rightAnswer();
+       nextQuestion();
     });
 }
 
@@ -141,19 +143,33 @@ function nextQuestion(){
 });
 
 }
+//Resets the QUestion and Score Values and rerenders the question
+/*function restartQuiz(){
+    $('.js-question-box').on('click', '.restart-quiz', function(e){
+        console.log('restartQuiz ran');
+        e.preventDefault();
+        currentQuestion=0;
+        score=0;
+        renderQuiz(currentQuestion);
+        restartQuiz();
+    });
+    
 
+}*/
 //responsible to display the Score Page when the quiz is finished
 function yourResults(){
-    console.log(`your results ran`)
-
+    console.log(`your results ran`);
+    const resultString=`<h3>Your Score is ${score}</h3><p>I hope you'll join me for a class sometime!</p><button id="start" type="submit">Retry</button>`;
+    $('.js-question-box').html(resultString);
+    startQuiz();
 }
 
 //Calls the above functions
 function runQuiz(){
     startQuiz();
     getAnswerFeedback();
-   nextQuestion();
-    //yourResults();
+   // restartQuiz();
+  
 }
 
 $(runQuiz())

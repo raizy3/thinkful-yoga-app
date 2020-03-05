@@ -61,3 +61,12 @@ fieldset{
     justify-content: space-around;
     margin-left: 15%;
 }
+
+h3{
+    text-align: center;
+}
+
+p{
+    text-align: center;
+    margin-top:15%;
+}
