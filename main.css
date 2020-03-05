@@ -1,18 +1,29 @@
 *{
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin-top: 4%;
     width:95%;
     margin-left: auto;
     margin-right: auto;
+    font-size: 12px;
 }
+
+body{
+    background-image: url(yoga-images/adventure-balance-balanced-balancing-7640.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+   
+
+}   
 
 .title{
     text-align: center;
+    font-size: 20px;
 }
 
 .question-box{
-    border: 1px solid gray;
+    border: 1px solid #0f0c3a;
     margin-bottom: 10%;
     border-radius: 3px;
     width: 75%;
@@ -21,6 +32,7 @@
 .question-box h2{
     font-size: 20px;
     text-align: center;
+  
 }
 
 button{
@@ -31,7 +43,11 @@ button{
     margin-top: 15%;
     margin-left: 40%;
     margin-bottom: 5%;
+    box-shadow: 1px 1px gray;
+    background-color: rgba(0, 0, 126, 0.541);
+    color: white;
 }
+
 
 .photo{
     width: 45%;
@@ -69,4 +85,18 @@ h3{
 p{
     text-align: center;
     margin-top:15%;
+}
+
+@media screen and (min-width:768px){
+    body{
+        font-size: 16px;
+    }
+
+    .question-box{
+        width: 60%;
+    }
+
+    .photo{
+        width: 55%;
+    }
 }
