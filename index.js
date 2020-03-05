@@ -84,7 +84,7 @@ function renderQuiz(currentQues){
 
     $('.next').hide();
 
-
+    nextQuestion();
 }
 
 //display the question number
@@ -137,7 +137,7 @@ function getAnswerFeedback(){
     $('form').on('click', '.js-submit', function(e){
         e.preventDefault();
        rightAnswer();
-       nextQuestion();
+      
     });
 }
 
